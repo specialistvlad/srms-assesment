@@ -20,10 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex">
-          <div className="w-1/4 h-screen">
+          <div className="w-1/8 h-screen px-8 py-4">
             <NavigationBar />
           </div>
-          <div className="w-3/4 p-4">{children}</div>
+          <div className="flex-1">{children}</div>
         </div>
       </body>
     </html>

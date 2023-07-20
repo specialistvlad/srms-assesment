@@ -12,8 +12,8 @@ function convertDateToCanadian(value): string {
   const birthdayDate = new Date(value);
 
   // Get the individual components of the date (month, day, year)
-  const month = String(birthdayDate.getMonth() + 1).padStart(2, '0');
-  const day = String(birthdayDate.getDate()).padStart(2, '0');
+  const month = String(birthdayDate.getMonth() + 1).padStart(2, "0");
+  const day = String(birthdayDate.getDate()).padStart(2, "0");
   const year = birthdayDate.getFullYear();
 
   // Create the formatted date string
@@ -24,25 +24,31 @@ export default async function StundentsPage() {
   const data = await getData();
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Birthday</th>
-          <th>Email</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((items) => (
-          <tr key={items.id}>
-            <td>{items.firstName} {items.lastName}</td>
-            <td>{convertDateToCanadian(items.birthday)}</td>
-            <td>{items.email}</td>
-            <td>❌</td>
+    <div className="container mx-auto mt-8">
+      <table className="min-w-full table-auto">
+        <thead>
+          <tr>
+            <th className="px-4 py-2">Name</th>
+            <th className="px-4 py-2">Birthday</th>
+            <th className="px-4 py-2">Email</th>
+            <th className="px-4 py-2">Delete</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((items) => (
+            <tr key={items.id}>
+              <td className="border px-4 py-2">
+                {items.firstName} {items.lastName}
+              </td>
+              <td className="border px-4 py-2">
+                {convertDateToCanadian(items.birthday)}
+              </td>
+              <td className="border px-4 py-2">{items.email}</td>
+              <td className="border px-4 py-2">❌</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
