@@ -12,14 +12,15 @@ export default function AddStundentsPage() {
         className="flex flex-col gap-2 rounded-lg bg-neutral-50 p-8"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <label htmlFor="card-name">Name</label>
+        <h1 className="font-bold">Add</h1><br/>
+        <label htmlFor="student-name">Name</label>
         <input
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
           type="text"
-          {...register("name")}
+          {...register("student-name")}
         />
 
-        <label htmlFor="card-expiry">Expiry Date</label>
+        <label htmlFor="birthday">Expiry Date</label>
         <input
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
           type="text"

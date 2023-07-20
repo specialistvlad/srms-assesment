@@ -35,8 +35,7 @@ const port = process.env.VLK_SRMS_API_PORT || 5123;
   app.post("/students", async (req: Request, res: Response) => {
     try {
       const result = await stundentsCollection.insertOne({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        studentName: req.body.studentName,
         birthday: req.body.birthday,
         email: req.body.email,
       });

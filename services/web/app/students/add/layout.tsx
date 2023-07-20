@@ -11,7 +11,6 @@ export default function StudentsLayout({
 }) {
   return (
     <div>
-      <h1 className="font-bold">Add</h1>
       <section>{children}</section>
     </div>
   );
