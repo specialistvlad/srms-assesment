@@ -11,6 +11,27 @@ function Error({ message }: { message: string }) {
   );
 }
 
+function isValidDate(dateString: string): string | boolean {
+  const pattern: RegExp = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19\d\d|20\d\d)$/;
+
+  if (!pattern.test(dateString)) {
+    return 'Date format is invalid!'; // Date format is invalid
+  }
+
+  const currentDate: Date = new Date();
+  const inputDate: Date = new Date(dateString);
+
+  // Calculate the difference in years between the current date and the input date
+  const yearDifference: number = currentDate.getFullYear() - inputDate.getFullYear();
+
+  // Check if the total difference is greater than 10 years
+  if (yearDifference < 10) {
+    return 'Student must be at least 10 years old.';
+  }
+
+  return true;
+}
+
 export default function AddStundentPage() {
   const {
     register,
@@ -19,7 +40,7 @@ export default function AddStundentPage() {
   } = useForm<FormInputs>();
   const onSubmit = (data: unknown) => console.log(data);
   return (
-    <div className={clsx("flex h-screen w-full items-center justify-center")}>
+    <div className={clsx("flex w-full items-center justify-center")}>
       <form
         className="flex flex-col gap-2 rounded-lg bg-neutral-50 p-8"
         onSubmit={handleSubmit(onSubmit)}
@@ -31,7 +52,7 @@ export default function AddStundentPage() {
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
           type="text"
           {...register("name", {
-            required: { value: true, message: "Full Name Required" },
+            required: { value: true, message: "First Name Required" },
             pattern: {
               value: /^[^\S\r\n]{0,15}[\S\s]{0,30}[^\S\r\n]{0,15}$/,
               message: "Invalid Full Name",
@@ -40,6 +61,20 @@ export default function AddStundentPage() {
         />
         {errors.name && <Error message={errors.name.message!} />}
 
+        <label htmlFor="last">Name</label>
+        <input
+          className="rounded border border-neutral-200 bg-neutral-50 p-1"
+          type="text"
+          {...register("last", {
+            required: { value: true, message: "Last Name Required" },
+            pattern: {
+              value: /^[^\S\r\n]{0,15}[\S\s]{0,30}[^\S\r\n]{0,15}$/,
+              message: "Invalid Full Name",
+            },
+          })}
+        />
+        {errors.last && <Error message={errors.last.message!} />}
+
         <label htmlFor="birthday">Expiry Date</label>
         <input
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
@@ -47,11 +82,12 @@ export default function AddStundentPage() {
           placeholder="mm/dd/yyyy"
           {...register("birthday", {
             required: { value: true, message: "Birthday Required" },
-            pattern: {
-              value:
-                /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19\d\d|20\d\d)$/,
-              message: "Invalid Birthday",
-            },
+            // pattern: {
+            //   value:
+            //     /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19\d\d|20\d\d)$/,
+            //   message: "Invalid Birthday",
+            // },
+            validate: isValidDate,
           })}
         />
         {errors.birthday && <Error message={errors.birthday.message!} />}

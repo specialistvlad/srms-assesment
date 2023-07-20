@@ -55,17 +55,14 @@ export default function AddStundentPage() {
         {errors.courseName && <Error message={errors.courseName.message!} />}
 
         <label htmlFor="score">Score</label>
-        <input
-          className="rounded border border-neutral-200 bg-neutral-50 p-1"
-          type="text"
-          {...register("score", {
-            required: { value: true, message: "Course Name Required" },
-            pattern: {
-              value: /^a|b|c|d|e|f|A|B|C|D|E|F{1}$/,
-              message: "Invalid Score",
-            },
-          })}
-        />
+        <select {...register("score")}>
+          <option value="a">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+        </select>
         {errors.score && <Error message={errors.score.message!} />}
 
         <button className="mt-5 rounded bg-green-500 p-2 text-neutral-50">
