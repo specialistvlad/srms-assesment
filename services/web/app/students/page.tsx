@@ -23,7 +23,7 @@ export default async function StundentsPage() {
       <tbody>
         {data.map((items) => (
           <tr key={items.id}>
-            <td>{items.studentName}</td>
+            <td>{items.fullName}</td>
             <td>{items.birthday}</td>
             <td>{items.email}</td>
             <td>❌</td>
