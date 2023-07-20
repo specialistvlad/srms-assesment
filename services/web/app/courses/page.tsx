@@ -1,16 +1,23 @@
 async function getData() {
-  const res = await fetch(`https://dummyjson.com/products`);
-  const list = await res.json();
-  return list.products;
+  const res = await fetch(`http://localhost:5123/courses`, { cache: 'no-store' });
+  return await res.json();
 }
 
 export default async function CoursesPage() {
   const data = await getData();
   return (
-    <ul>
+    <table>
+      <tr>
+        <th>Course Name</th>
+        <th>Student</th>
+        <th>Score</th>
+      </tr>
       {data.map((items) => (
-        <li key={items.id}>{items.title}</li>
+        <tr key={items.id}>
+          <td>{items.courseName}</td>
+          <td>❌</td>
+        </tr>
       ))}
-    </ul>
+    </table>
   );
 }

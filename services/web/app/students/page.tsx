@@ -1,16 +1,35 @@
+import { log } from "console";
+
 async function getData() {
-  const res = await fetch(`https://dummyjson.com/users`);
-  const list = await res.json();
-  return list.users;
+  const res = await fetch(`http://localhost:5123/students`, { cache: 'no-store' });
+  return await res.json();
 }
 
 export default async function StundentsPage() {
   const data = await getData();
+
   return (
-    <ul>
-      {data.map((items) => (
-        <li key={items.id}>{items.firstName}</li>
-      ))}
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Birthday</th>
+          <th>Email</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((items) => (
+          <tr key={items.id}>
+            <td>
+              {items.firstName} {items.lastName}
+            </td>
+            <td>{items.birthday}</td>
+            <td>{items.email}</td>
+            <td>❌</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }

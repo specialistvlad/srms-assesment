@@ -1,16 +1,29 @@
 async function getData() {
-  const res = await fetch(`https://dummyjson.com/users`);
-  const list = await res.json();
-  return list.users;
+  const res = await fetch(`http://localhost:5123/results`, { cache: 'no-store' });
+  return await res.json();
 }
 
 export default async function ResultsPage() {
   const data = await getData();
+  console.log(data);
   return (
-    <ul>
-      {data.map((items) => (
-        <li key={items.id}>{items.firstName}</li>
-      ))}
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Student</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((items) => (
+          <tr key={items.id}>
+            <td>{items.courseName}</td>
+            <td>{items.student}</td>
+            <td>{items.score}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
