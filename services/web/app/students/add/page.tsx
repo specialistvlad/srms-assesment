@@ -12,23 +12,19 @@ function Error({ message }: { message: string }) {
 }
 
 function isValidDate(dateString: string): string | boolean {
-  const pattern: RegExp = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19\d\d|20\d\d)$/;
-
-  if (!pattern.test(dateString)) {
-    return 'Date format is invalid!'; // Date format is invalid
-  }
-
   const currentDate: Date = new Date();
   const inputDate: Date = new Date(dateString);
 
   // Calculate the difference in years between the current date and the input date
-  const yearDifference: number = currentDate.getFullYear() - inputDate.getFullYear();
+  const yearDifference: number =
+    currentDate.getFullYear() - inputDate.getFullYear();
 
   // Check if the total difference is greater than 10 years
   if (yearDifference < 10) {
-    return 'Student must be at least 10 years old.';
+    return "Student must be at least 10 years old.";
   }
 
+  console.log(inputDate);
   return true;
 }
 
@@ -37,7 +33,7 @@ export default function AddStundentPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm();
   const onSubmit = (data: unknown) => console.log(data);
   return (
     <div className={clsx("flex w-full items-center justify-center")}>
@@ -78,15 +74,10 @@ export default function AddStundentPage() {
         <label htmlFor="birthday">Expiry Date</label>
         <input
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
-          type="text"
+          type="date"
           placeholder="mm/dd/yyyy"
           {...register("birthday", {
             required: { value: true, message: "Birthday Required" },
-            // pattern: {
-            //   value:
-            //     /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19\d\d|20\d\d)$/,
-            //   message: "Invalid Birthday",
-            // },
             validate: isValidDate,
           })}
         />
