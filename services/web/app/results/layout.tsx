@@ -11,7 +11,7 @@ export default function ResultsLayout({
 }) {
   return (
     <div>
-      <h1 className="text-2xl font-bold">All Results</h1>
+      <h1 className="text-2xl font-bold">Results</h1>
       <section>{children}</section>
     </div>
   );

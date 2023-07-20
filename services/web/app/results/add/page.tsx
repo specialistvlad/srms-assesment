@@ -26,7 +26,7 @@ export default function AddStundentPage() {
       >
         <h1 className="font-bold">Add</h1>
         <br />
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Student Name</label>
         <input
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
           type="text"
@@ -40,35 +40,34 @@ export default function AddStundentPage() {
         />
         {errors.name && <Error message={errors.name.message!} />}
 
-        <label htmlFor="birthday">Expiry Date</label>
+        <label htmlFor="course-name">Course Name</label>
         <input
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
           type="text"
-          placeholder="mm/dd/yyyy"
-          {...register("birthday", {
-            required: { value: true, message: "Birthday Required" },
+          {...register("courseName", {
+            required: { value: true, message: "Course Name Required" },
             pattern: {
-              value:
-                /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/(19\d\d|20\d\d)$/,
-              message: "Invalid Birthday",
+              value: /^[^\S\r\n]{0,15}[\S\s]{0,30}[^\S\r\n]{0,15}$/,
+              message: "Invalid Course Name",
             },
           })}
         />
-        {errors.birthday && <Error message={errors.birthday.message!} />}
+        {errors.courseName && <Error message={errors.courseName.message!} />}
 
-        <label htmlFor="email">Email</label>
+        <label htmlFor="score">Score</label>
         <input
           className="rounded border border-neutral-200 bg-neutral-50 p-1"
-          type="email"
-          {...register("email", {
-            required: { value: true, message: "Email Required" },
+          type="text"
+          {...register("score", {
+            required: { value: true, message: "Course Name Required" },
             pattern: {
-              value: /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/,
-              message: "Invalid Email",
+              value: /^a|b|c|d|e|f|A|B|C|D|E|F{1}$/,
+              message: "Invalid Score",
             },
           })}
         />
-        {errors.email && <Error message={errors.email.message!} />}
+        {errors.score && <Error message={errors.score.message!} />}
+
         <button className="mt-5 rounded bg-green-500 p-2 text-neutral-50">
           Submit
         </button>

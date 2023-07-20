@@ -11,7 +11,7 @@ export default function CoursesLayout({
 }) {
   return (
     <div>
-      <h1 className="text-2xl font-bold">All Courses</h1>
+      <h1 className="text-2xl font-bold">Courses</h1>
       <section>{children}</section>
     </div>
   );
