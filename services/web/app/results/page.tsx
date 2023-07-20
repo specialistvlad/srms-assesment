@@ -5,7 +5,6 @@ async function getData() {
 
 export default async function ResultsPage() {
   const data = await getData();
-  console.log(data);
   return (
     <table>
       <thead>
