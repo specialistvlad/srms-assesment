@@ -27,6 +27,7 @@ services:
     restart: on-failure
     environment:
       - VLK_SRMS_MONGO_URL=mongodb://root:example@mongodb:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
+      - VLK_SRMS_API_PORT=5123
     depends_on:
       - mongodb
     networks:
