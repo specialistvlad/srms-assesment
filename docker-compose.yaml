@@ -1,0 +1,33 @@
+version: "3.8"
+
+networks:
+  vlk-srms-net:
+    driver: bridge
+  
+volumes:
+  vlk-srms-dbdata: null
+
+services:
+  mongodb:
+    image: mongo:6-jammy
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - '27017:27017'
+    volumes:
+      - vlk-srms-dbdata:/data/db
+
+  api:
+    image: vlk-srms-api:${VLK_SRMS_VERSION}
+    build:
+      context: ./components/api
+      dockerfile: Dockerfile
+    container_name: vlk-srms-api
+    restart: on-failure
+    environment:
+      - VLK_SRMS_MONGO_URL=mongodb://root:example@mongodb:27017/?authSource=admin&readPreference=primary&ssl=false&directConnection=true
+    depends_on:
+      - mongodb
+    networks:
+      - vlk-srms-net
