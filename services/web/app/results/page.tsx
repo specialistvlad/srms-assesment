@@ -16,7 +16,7 @@ export default async function ResultsPage() {
       </thead>
       <tbody>
         {data.map((items) => (
-          <tr key={items.id}>
+          <tr key={items._id}>
             <td>{items.courseName}</td>
             <td>{items.student}</td>
             <td>{items.score}</td>

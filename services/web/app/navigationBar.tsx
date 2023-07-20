@@ -9,9 +9,11 @@ export default function NavigationBar() {
       <br />
       <Link href="/students">🧑‍🎓 Students List</Link>
       <br />
+      <br />
       <Link href="/courses/add">➕ Add New Courses</Link>
       <br />
       <Link href="/courses">📗 Courses List</Link>
+      <br />
       <br />
       <Link href="/results/add">➕ Add New Results</Link>
       <br />
