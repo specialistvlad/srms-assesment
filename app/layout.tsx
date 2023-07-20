@@ -19,9 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="grid grid-cols-2 grid-rows-1 gap-1"></div>
-        <NavigationBar/>
-        <div>{children}</div>
+        <div className="flex">
+          <div className="w-1/4 h-screen bg-gray-200">
+            <NavigationBar />
+          </div>
+          <div className="w-3/4 p-4">{children}</div>
+        </div>
       </body>
     </html>
   );

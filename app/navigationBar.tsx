@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NavigationBar() {
   return (
     <>
-      <div>Menu</div>
+      <h1 className="text-2xl font-bold">Navigation bar</h1>
       <br />
       <Link href="/">Home</Link>
       <br />

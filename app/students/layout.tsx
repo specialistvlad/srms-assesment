@@ -11,7 +11,7 @@ export default function StudentsLayout({
 }) {
   return (
     <div>
-      <h1>All Students</h1>
+      <h1 className="text-2xl font-bold">All Students</h1>
       <section>{children}</section>
     </div>
   );
