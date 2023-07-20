@@ -1,11 +1,5 @@
-import { DeleteButton } from "../delete";
-
-async function getData() {
-  const res = await fetch(`http://localhost:5123/students`, {
-    cache: "no-store",
-  });
-  return await res.json();
-}
+import { DeleteButton } from "./delete";
+import { getStudents } from "../provider";
 
 function convertDateToCanadian(value): string {
   // Convert the date string to a Date object
@@ -21,7 +15,7 @@ function convertDateToCanadian(value): string {
 }
 
 export default async function StundentsPage() {
-  const data = await getData();
+  const data = await getStudents();
 
   return (
     <div className="container mx-auto mt-8">

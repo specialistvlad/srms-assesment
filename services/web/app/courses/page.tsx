@@ -1,14 +1,8 @@
-import { DeleteButton } from "../delete";
-
-async function getData() {
-  const res = await fetch(`http://localhost:5123/courses`, {
-    cache: "no-store",
-  });
-  return await res.json();
-}
+import { DeleteButton } from "./delete";
+import { getCourses } from "../provider";
 
 export default async function CoursesPage() {
-  const data = await getData();
+  const data = await getCourses();
   return (
     <div className="container mx-auto mt-8">
       <table className="min-w-full table-auto">
@@ -23,7 +17,7 @@ export default async function CoursesPage() {
             <tr key={items._id}>
               <td className="border px-4 py-2">{items.courseName}</td>
               <td className="border px-4 py-2 text-center">
-                <DeleteButton entity="courses" itemId={items._id} />
+                <DeleteButton itemId={items._id} />
               </td>
             </tr>
           ))}

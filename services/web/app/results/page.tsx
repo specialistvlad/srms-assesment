@@ -1,12 +1,7 @@
-async function getData() {
-  const res = await fetch(`http://localhost:5123/results`, {
-    cache: "no-store",
-  });
-  return await res.json();
-}
+import { getResults } from '../provider';
 
 export default async function ResultsPage() {
-  const data = await getData();
+  const data = await getResults();
   return (
     <div className="container mx-auto mt-8">
       <table className="min-w-full table-auto">

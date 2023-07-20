@@ -16,7 +16,7 @@ export default function AddStundentPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm();
   const onSubmit = (data: unknown) => console.log(data);
   return (
     <div className={clsx("flex h-screen w-full items-center justify-center")}>

@@ -10,6 +10,8 @@ export async function connectToDatabase() {
   const db: mongoDB.Db = client.db("srms");
   const coursesCollection: mongoDB.Collection = db.collection('courses');
   const studentsCollection: mongoDB.Collection = db.collection('students');
+  const resultsCollection: mongoDB.Collection = db.collection('results');
+  
 
   console.log(
     `Successfully connected to database: ${db.databaseName}`
@@ -18,5 +20,6 @@ export async function connectToDatabase() {
   return {
     coursesCollection,
     studentsCollection,
+    resultsCollection,
   }
 }

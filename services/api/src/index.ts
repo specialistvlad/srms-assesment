@@ -15,7 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 (async () => {
-  const { coursesCollection, studentsCollection } = await connectToDatabase();
+  const { coursesCollection, studentsCollection, resultsCollection } =
+    await connectToDatabase();
+
   app.get("/", (req: Request, res: Response) =>
     res.send("Hello World from app.ts!")
   );
@@ -42,9 +44,7 @@ app.use(express.urlencoded({ extended: true }));
       result
         ? res
             .status(201)
-            .send(
-              `Successfully created a Student with id ${result.insertedId}`
-            )
+            .send(`Successfully created a Student with id ${result.insertedId}`)
         : res.status(500).send("Failed to create a Student.");
     } catch (error) {
       console.error(error);
@@ -104,9 +104,7 @@ app.use(express.urlencoded({ extended: true }));
       result
         ? res
             .status(201)
-            .send(
-              `Successfully created a course with id ${result.insertedId}`
-            )
+            .send(`Successfully created a course with id ${result.insertedId}`)
         : res.status(500).send("Failed to create a course.");
     } catch (error) {
       console.error(error);
@@ -162,6 +160,25 @@ app.use(express.urlencoded({ extended: true }));
       },
     ])
   );
+
+  app.post("/results", async (req: Request, res: Response) => {
+    try {
+      const result = await resultsCollection.insertOne({
+        courseId: req.body.courseId,
+        studentId: req.body.courseId,
+        score: req.body.score,
+      });
+
+      result
+        ? res
+            .status(201)
+            .send(`Successfully created a result with id ${result.insertedId}`)
+        : res.status(500).send("Failed to create a result.");
+    } catch (error) {
+      console.error(error);
+      res.status(400).send(error);
+    }
+  });
 
   const server = app.listen(port, () =>
     console.log(`[server]: Server is running at http://localhost:${port}`)
