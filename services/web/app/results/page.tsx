@@ -1,28 +1,32 @@
 async function getData() {
-  const res = await fetch(`http://localhost:5123/results`, { cache: 'no-store' });
+  const res = await fetch(`http://localhost:5123/results`, {
+    cache: "no-store",
+  });
   return await res.json();
 }
 
 export default async function ResultsPage() {
   const data = await getData();
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Course Name</th>
-          <th>Student</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((items) => (
-          <tr key={items._id}>
-            <td>{items.courseName}</td>
-            <td>{items.student}</td>
-            <td>{items.score}</td>
+    <div className="container mx-auto mt-8">
+      <table className="min-w-full table-auto">
+        <thead>
+          <tr>
+            <th className="px-4 py-2">Course Name</th>
+            <th className="px-4 py-2">Student</th>
+            <th className="px-4 py-2">Score</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((items) => (
+            <tr key={items._id}>
+              <td className="border px-4 py-2">{items.courseName}</td>
+              <td className="border px-4 py-2">{items.student}</td>
+              <td className="border px-4 py-2">{items.score}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

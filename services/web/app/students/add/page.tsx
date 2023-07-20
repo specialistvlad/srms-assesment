@@ -24,7 +24,6 @@ function isValidDate(dateString: string): string | boolean {
     return "Student must be at least 10 years old.";
   }
 
-  console.log(inputDate);
   return true;
 }
 

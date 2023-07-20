@@ -31,7 +31,6 @@ app.use(express.urlencoded({ extended: true }));
   });
 
   app.post("/students", async (req: Request, res: Response) => {
-    console.log(req.body);
     try {
       const result = await studentsCollection.insertOne({
         firstName: req.body.firstName,
@@ -44,9 +43,9 @@ app.use(express.urlencoded({ extended: true }));
         ? res
             .status(201)
             .send(
-              `Successfully created a new game with id ${result.insertedId}`
+              `Successfully created a Student with id ${result.insertedId}`
             )
-        : res.status(500).send("Failed to create a new game.");
+        : res.status(500).send("Failed to create a Student.");
     } catch (error) {
       console.error(error);
       res.status(400).send(error);
@@ -87,18 +86,65 @@ app.use(express.urlencoded({ extended: true }));
     }
   });
 
-  app.get("/courses", (req: Request, res: Response) =>
-    res.json([
-      {
-        id: "a1",
-        courseName: "Web Application Scripting",
-      },
-      {
-        id: "a2",
-        courseName: "Database Management",
-      },
-    ])
-  );
+  app.get("/courses", async (req: Request, res: Response) => {
+    try {
+      const courses = await coursesCollection.find({}).toArray();
+      res.status(200).send(courses);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+  app.post("/courses", async (req: Request, res: Response) => {
+    try {
+      const result = await coursesCollection.insertOne({
+        courseName: req.body.courseName,
+      });
+
+      result
+        ? res
+            .status(201)
+            .send(
+              `Successfully created a course with id ${result.insertedId}`
+            )
+        : res.status(500).send("Failed to create a course.");
+    } catch (error) {
+      console.error(error);
+      res.status(400).send(error);
+    }
+  });
+
+  app.delete("/courses/:id", async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    try {
+      // Convert the courses to an ObjectId
+      const objectIdCoursesId = new ObjectId(id);
+
+      // Check if the courses with the given ID exists in the database
+      const existingCourse = await coursesCollection.findOne({
+        _id: objectIdCoursesId,
+      });
+      if (!existingCourse) {
+        return res.status(404).send("courses not found.");
+      }
+
+      // Delete the courses with the given ID
+      const deleteResult = await coursesCollection.deleteOne({
+        _id: objectIdCoursesId,
+      });
+
+      if (deleteResult.deletedCount === 1) {
+        res.status(200).send(`courses with ID ${id} successfully deleted.`);
+        console.log(`courses with ID ${id} successfully deleted.`);
+      } else {
+        res.status(500).send("Failed to delete the student.");
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while deleting the student.");
+    }
+  });
 
   app.get("/results", (req: Request, res: Response) =>
     res.json([

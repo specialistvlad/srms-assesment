@@ -1,4 +1,4 @@
-import { DeleteButton } from "./delete";
+import { DeleteButton } from "../delete";
 
 async function getData() {
   const res = await fetch(`http://localhost:5123/students`, {
@@ -44,8 +44,9 @@ export default async function StundentsPage() {
                 {convertDateToCanadian(items.birthday)}
               </td>
               <td className="border px-4 py-2">{items.email}</td>
-              <td className="border px-4 py-2"><DeleteButton studentId={items._id} /></td>
-              
+              <td className="border px-4 py-2">
+                <DeleteButton entity="courses" itemId={items._id} />
+              </td>
             </tr>
           ))}
         </tbody>

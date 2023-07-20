@@ -11,18 +11,54 @@ function Error({ message }: { message: string }) {
   );
 }
 
+async function onSubmit(reset, clearErrors, data) {
+  // Send the data to the server in JSON format.
+  const JSONdata = JSON.stringify(data);
+
+  // API endpoint where we send form data.
+  const endpoint = "http://localhost:5123/courses";
+
+  // Form the request for sending data to the server.
+  const options = {
+    // The method is POST because we are sending data.
+    method: "POST",
+    // Tell the server we're sending JSON.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    // Body of the request is the JSON data we created above.
+    body: JSONdata,
+  };
+
+  // Send the form data to our forms API on Vercel and get a response.
+  try {
+    const response = await fetch(endpoint, options);
+    console.log("bbb", response.status);
+    if (response.status !== 201) {
+      alert("Unable to submit due server error, see console(requests).");
+      return;
+    }
+    alert("User has been added!");
+    reset();
+    clearErrors({});
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export default function AddCoursePage() {
   const {
     register,
     handleSubmit,
+    reset,
+    clearErrors,
     formState: { errors },
-  } = useForm<FormInputs>();
-  const onSubmit = (data: unknown) => console.log(data);
+  } = useForm();
   return (
     <div className={clsx("flex h-screen w-full items-center justify-center")}>
       <form
         className="flex flex-col gap-2 rounded-lg bg-neutral-50 p-8"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit.bind(this, reset, clearErrors))}
       >
         <h1 className="font-bold">Add</h1>
         <br />
