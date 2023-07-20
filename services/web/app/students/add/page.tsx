@@ -56,6 +56,7 @@ async function onSubmit(reset, clearErrors, data) {
       alert('Unable to submit due server error, see console(requests).');
       return;
     }
+    alert('User has been added!');
     reset();
     clearErrors({});
   } catch (error) {
