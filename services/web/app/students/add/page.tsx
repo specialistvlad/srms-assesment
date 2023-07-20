@@ -29,7 +29,6 @@ function isValidDate(dateString: string): string | boolean {
 }
 
 async function onSubmit(reset, clearErrors, data) {
-  console.log(data);
   // Send the data to the server in JSON format.
   const JSONdata = JSON.stringify(data);
 
@@ -51,12 +50,12 @@ async function onSubmit(reset, clearErrors, data) {
   // Send the form data to our forms API on Vercel and get a response.
   try {
     const response = await fetch(endpoint, options);
-    console.log('bbb', response.status)
+    console.log("bbb", response.status);
     if (response.status !== 201) {
-      alert('Unable to submit due server error, see console(requests).');
+      alert("Unable to submit due server error, see console(requests).");
       return;
     }
-    alert('User has been added!');
+    alert("User has been added!");
     reset();
     clearErrors({});
   } catch (error) {

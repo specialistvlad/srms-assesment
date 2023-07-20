@@ -1,4 +1,4 @@
-import { log } from "console";
+import { DeleteButton } from "./delete";
 
 async function getData() {
   const res = await fetch(`http://localhost:5123/students`, {
@@ -36,7 +36,7 @@ export default async function StundentsPage() {
         </thead>
         <tbody>
           {data.map((items) => (
-            <tr key={items.id}>
+            <tr key={items._id}>
               <td className="border px-4 py-2">
                 {items.firstName} {items.lastName}
               </td>
@@ -44,7 +44,8 @@ export default async function StundentsPage() {
                 {convertDateToCanadian(items.birthday)}
               </td>
               <td className="border px-4 py-2">{items.email}</td>
-              <td className="border px-4 py-2">❌</td>
+              <td className="border px-4 py-2"><DeleteButton studentId={items._id} /></td>
+              
             </tr>
           ))}
         </tbody>
