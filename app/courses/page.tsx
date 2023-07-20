@@ -1,7 +1,5 @@
 async function getData() {
-  const res = await fetch(`https://dummyjson.com/products`, {
-    cache: "force-cache",
-  });
+  const res = await fetch(`https://dummyjson.com/products`);
   const list = await res.json();
   return list.products;
 }
@@ -9,13 +7,10 @@ async function getData() {
 export default async function CoursesPage() {
   const data = await getData();
   return (
-    <span>
-      CoursesPage
-      <ul>
-        {data.map((list) => (
-          <li key={list.id}>{list.title}</li>
-        ))}
-      </ul>
-    </span>
+    <ul>
+      {data.map((items) => (
+        <li key={items.id}>{items.title}</li>
+      ))}
+    </ul>
   );
 }
