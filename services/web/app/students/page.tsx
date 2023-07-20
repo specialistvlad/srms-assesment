@@ -7,6 +7,19 @@ async function getData() {
   return await res.json();
 }
 
+function convertDateToCanadian(value): string {
+  // Convert the date string to a Date object
+  const birthdayDate = new Date(value);
+
+  // Get the individual components of the date (month, day, year)
+  const month = String(birthdayDate.getMonth() + 1).padStart(2, '0');
+  const day = String(birthdayDate.getDate()).padStart(2, '0');
+  const year = birthdayDate.getFullYear();
+
+  // Create the formatted date string
+  return `${month}/${day}/${year}`;
+}
+
 export default async function StundentsPage() {
   const data = await getData();
 
@@ -23,8 +36,8 @@ export default async function StundentsPage() {
       <tbody>
         {data.map((items) => (
           <tr key={items.id}>
-            <td>{items.fullName}</td>
-            <td>{items.birthday}</td>
+            <td>{items.firstName} {items.lastName}</td>
+            <td>{convertDateToCanadian(items.birthday)}</td>
             <td>{items.email}</td>
             <td>❌</td>
           </tr>

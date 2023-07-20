@@ -1,8 +1,17 @@
 import express, { Request, Response } from "express";
+import cors from 'cors';
+
 import { connectToDatabase } from "./mongo";
 
 const app = express();
 const port = process.env.VLK_SRMS_API_PORT || 5123;
+
+// Allow all origins, you can configure it to allow specific origins in production
+app.use(cors());
+
+// Middleware to parse JSON and URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 (async () => {
   const { coursesCollection, stundentsCollection } = await connectToDatabase();
@@ -21,20 +30,14 @@ const port = process.env.VLK_SRMS_API_PORT || 5123;
         res.status(500).send(error);
       }
     }
-    // res.json([
-    //   {
-    //     id: "1",
-    //     fullName: "John Smith",
-    //     birthday: "12/24/1999",
-    //     email: "js@amazon.com",
-    //   },
-    // ])
   );
 
   app.post("/students", async (req: Request, res: Response) => {
+    console.log(req.body);
     try {
       const result = await stundentsCollection.insertOne({
-        fullName: req.body.fullName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         birthday: req.body.birthday,
         email: req.body.email,
       });
