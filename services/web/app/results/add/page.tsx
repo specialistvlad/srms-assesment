@@ -5,7 +5,7 @@ import { clsx } from "clsx";
 import useSWR from "swr";
 import { postResults } from "../../provider";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+const fetcher = (url, options) => fetch(url, options).then((res) => res.json());
 
 // import { rootUrl, getStudents, getCourses } from "../../provider";
 import { rootUrl } from "../../provider";
@@ -57,7 +57,7 @@ export default function AddResultPage() {
             </option>
           ))}
         </select>
-        {errors.studentId && <Error message={errors.studentId.message!} />}
+        {errors.studentId && <Error message={String(errors.studentId.message)} />}
 
         <label htmlFor="courseId">Course</label>
         <select {...register("courseId")}>
@@ -67,7 +67,7 @@ export default function AddResultPage() {
             </option>
           ))}
         </select>
-        {errors.courseId && <Error message={errors.courseId.message!} />}
+        {errors.courseId && <Error message={String(errors.courseId.message)} />}
 
         <label htmlFor="score">Score</label>
         <select {...register("score")}>
@@ -78,7 +78,7 @@ export default function AddResultPage() {
           <option value="E">E</option>
           <option value="F">F</option>
         </select>
-        {errors.score && <Error message={errors.score.message!} />}
+        {errors.score && <Error message={String(errors.score.message)} />}
 
         <button className="mt-5 rounded bg-green-500 p-2 text-neutral-50">
           Submit

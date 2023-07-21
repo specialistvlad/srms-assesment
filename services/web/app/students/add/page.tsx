@@ -57,7 +57,7 @@ export default function AddStundentPage() {
             },
           })}
         />
-        {errors.firstName && <Error message={errors.firstName.message!} />}
+        {errors.firstName && <Error message={String(errors.firstName.message)} />}
 
         <label htmlFor="lastName">Last Name</label>
         <input
@@ -72,7 +72,7 @@ export default function AddStundentPage() {
             },
           })}
         />
-        {errors.lastName && <Error message={errors.lastName.message!} />}
+        {errors.lastName && <Error message={String(errors.lastName.message)} />}
 
         <label htmlFor="birthday">Expiry Date</label>
         <input
@@ -84,7 +84,7 @@ export default function AddStundentPage() {
             validate: isValidDate,
           })}
         />
-        {errors.birthday && <Error message={errors.birthday.message!} />}
+        {errors.birthday && <Error message={String(errors.birthday.message)} />}
 
         <label htmlFor="email">Email</label>
         <input
@@ -98,7 +98,7 @@ export default function AddStundentPage() {
             },
           })}
         />
-        {errors.email && <Error message={errors.email.message!} />}
+        {errors.email && <Error message={String(errors.email.message)} />}
         <button className="mt-5 rounded bg-green-500 p-2 text-neutral-50">
           Submit
         </button>

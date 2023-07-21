@@ -39,7 +39,7 @@ export default async function StundentsPage() {
               </td>
               <td className="border px-4 py-2">{items.email}</td>
               <td className="border px-4 py-2">
-                <DeleteButton entity="courses" itemId={items._id} />
+                <DeleteButton itemId={items._id} />
               </td>
             </tr>
           ))}

@@ -40,7 +40,7 @@ export default function AddCoursePage() {
             },
           })}
         />
-        {errors.courseName && <Error message={errors.courseName.message!} />}
+        {errors.courseName && <Error message={String(errors.courseName.message)} />}
         <button className="mt-5 rounded bg-green-500 p-2 text-neutral-50">
           Submit
         </button>
