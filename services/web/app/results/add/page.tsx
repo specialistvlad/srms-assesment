@@ -3,12 +3,8 @@
 import { useForm } from "react-hook-form";
 import { clsx } from "clsx";
 import useSWR from "swr";
-import { postResults } from "../../provider";
 
 const fetcher = (url, options) => fetch(url, options).then((res) => res.json());
-
-// import { rootUrl, getStudents, getCourses } from "../../provider";
-import { rootUrl } from "../../provider";
 
 function Error({ message }: { message: string }) {
   return (
@@ -16,6 +12,25 @@ function Error({ message }: { message: string }) {
       {message}
     </div>
   );
+}
+
+export async function post(reset, clearErrors, data) {
+  try {
+    const response = await fetch(`/api/results`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (response.status !== 200) {
+      alert("Unable to submit due server error, see console(requests).");
+      return;
+    }
+    alert("Result has been added!");
+    reset();
+    clearErrors({});
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export default function AddResultPage() {
@@ -28,24 +43,23 @@ export default function AddResultPage() {
   } = useForm();
 
   const { data: students, error: studentsError } = useSWR(
-    `${rootUrl}/students`,
+    "/api/students",
     fetcher
   );
+
   const { data: courses, error: coursesError } = useSWR(
-    `${rootUrl}/courses`,
+    "/api/courses",
     fetcher
   );
 
   if (coursesError || studentsError) return <div>Failed to load</div>;
   if (!courses || !students) return <div>Loading...</div>;
 
-  console.log(courses, students);
-  const onSubmit = (data: unknown) => console.log(data);
   return (
     <div className={clsx("flex h-screen w-full items-center justify-center")}>
       <form
         className="flex flex-col gap-2 rounded-lg bg-neutral-50 p-8"
-        onSubmit={handleSubmit(postResults.bind(this, reset, clearErrors))}
+        onSubmit={handleSubmit(post.bind(this, reset, clearErrors))}
       >
         <h1 className="font-bold">Add</h1>
         <br />
@@ -57,7 +71,9 @@ export default function AddResultPage() {
             </option>
           ))}
         </select>
-        {errors.studentId && <Error message={String(errors.studentId.message)} />}
+        {errors.studentId && (
+          <Error message={String(errors.studentId.message)} />
+        )}
 
         <label htmlFor="courseId">Course</label>
         <select {...register("courseId")}>

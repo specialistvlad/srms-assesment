@@ -2,36 +2,19 @@
 
 import { useForm } from "react-hook-form";
 import { clsx } from "clsx";
-// import { postStudent } from "../../provider";
 
-
-export async function postStudent(reset, clearErrors, data) {
-  // Send the data to the server in JSON format.
-  const JSONdata = JSON.stringify(data);
-
-  // API endpoint where we send form data.
-  const endpoint = `/api/students`;
-
-  // Form the request for sending data to the server.
-  const options = {
-    // The method is POST because we are sending data.
-    method: "POST",
-    // Tell the server we're sending JSON.
-    headers: {
-      "Content-Type": "application/json",
-    },
-    // Body of the request is the JSON data we created above.
-    body: JSONdata,
-  };
-
-  // Send the form data to our forms API on Vercel and get a response.
+export async function post(reset, clearErrors, data) {
   try {
-    const response = await fetch(endpoint, options);
+    const response = await fetch(`/api/courses`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
     if (response.status !== 200) {
       alert("Unable to submit due server error, see console(requests).");
       return;
     }
-    alert("User has been added!");
+    alert("Student has been added!");
     reset();
     clearErrors({});
   } catch (error) {
@@ -75,7 +58,7 @@ export default function AddStundentPage() {
     <div className={clsx("flex w-full items-center justify-center")}>
       <form
         className="flex flex-col gap-2 rounded-lg p-8"
-        onSubmit={handleSubmit(postStudent.bind(this, reset, clearErrors))}
+        onSubmit={handleSubmit(post.bind(this, reset, clearErrors))}
       >
         <h1 className="font-bold">Add</h1>
         <br />
@@ -92,7 +75,9 @@ export default function AddStundentPage() {
             },
           })}
         />
-        {errors.firstName && <Error message={String(errors.firstName.message)} />}
+        {errors.firstName && (
+          <Error message={String(errors.firstName.message)} />
+        )}
 
         <label htmlFor="lastName">Last Name</label>
         <input
