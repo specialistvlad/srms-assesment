@@ -1,4 +1,6 @@
-import express, { Request, Response } from "express";
+import 'dotenv/config'
+import { default as express, Request, Response } from "express";
+
 import { ObjectId } from "mongodb";
 import cors from "cors";
 
