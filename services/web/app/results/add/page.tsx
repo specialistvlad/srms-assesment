@@ -63,6 +63,7 @@ export default function AddResultPage() {
       >
         <h1 className="font-bold">Add</h1>
         <br />
+
         <label htmlFor="studentId">Student</label>
         <select {...register("studentId")}>
           {students.map((items) => (

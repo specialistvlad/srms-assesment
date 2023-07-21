@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { universalGet, universalPost } from "../../providers";
 
 export async function GET(request: Request) {
-  const result = await universalGet('students');
+  const result = await universalGet('courses');
   return NextResponse.json(result)
 }
 
