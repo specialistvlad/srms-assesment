@@ -2,7 +2,42 @@
 
 import { useForm } from "react-hook-form";
 import { clsx } from "clsx";
-import { postStudent } from "../../provider";
+// import { postStudent } from "../../provider";
+
+
+export async function postStudent(reset, clearErrors, data) {
+  // Send the data to the server in JSON format.
+  const JSONdata = JSON.stringify(data);
+
+  // API endpoint where we send form data.
+  const endpoint = `/api/students`;
+
+  // Form the request for sending data to the server.
+  const options = {
+    // The method is POST because we are sending data.
+    method: "POST",
+    // Tell the server we're sending JSON.
+    headers: {
+      "Content-Type": "application/json",
+    },
+    // Body of the request is the JSON data we created above.
+    body: JSONdata,
+  };
+
+  // Send the form data to our forms API on Vercel and get a response.
+  try {
+    const response = await fetch(endpoint, options);
+    if (response.status !== 200) {
+      alert("Unable to submit due server error, see console(requests).");
+      return;
+    }
+    alert("User has been added!");
+    reset();
+    clearErrors({});
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function Error({ message }: { message: string }) {
   return (
@@ -39,14 +74,14 @@ export default function AddStundentPage() {
   return (
     <div className={clsx("flex w-full items-center justify-center")}>
       <form
-        className="flex flex-col gap-2 rounded-lg bg-neutral-50 p-8"
+        className="flex flex-col gap-2 rounded-lg p-8"
         onSubmit={handleSubmit(postStudent.bind(this, reset, clearErrors))}
       >
         <h1 className="font-bold">Add</h1>
         <br />
         <label htmlFor="firstName">First Name</label>
         <input
-          className="rounded border border-neutral-200 bg-neutral-50 p-1"
+          className="rounded border border-neutral-200 p-1"
           type="text"
           name="firstName"
           {...register("firstName", {
@@ -61,7 +96,7 @@ export default function AddStundentPage() {
 
         <label htmlFor="lastName">Last Name</label>
         <input
-          className="rounded border border-neutral-200 bg-neutral-50 p-1"
+          className="rounded border border-neutral-200 p-1"
           type="text"
           name="lastName"
           {...register("lastName", {
@@ -76,7 +111,7 @@ export default function AddStundentPage() {
 
         <label htmlFor="birthday">Expiry Date</label>
         <input
-          className="rounded border border-neutral-200 bg-neutral-50 p-1"
+          className="rounded border border-neutral-200 p-1"
           type="date"
           placeholder="mm/dd/yyyy"
           {...register("birthday", {
@@ -88,7 +123,7 @@ export default function AddStundentPage() {
 
         <label htmlFor="email">Email</label>
         <input
-          className="rounded border border-neutral-200 bg-neutral-50 p-1"
+          className="rounded border border-neutral-200 p-1"
           type="email"
           {...register("email", {
             required: { value: true, message: "Email Required" },

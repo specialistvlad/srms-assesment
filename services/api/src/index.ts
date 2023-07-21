@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 
       result
         ? res
-            .status(201)
+            .status(200)
             .send(`Successfully created a Student with id ${result.insertedId}`)
         : res.status(500).send("Failed to create a Student.");
     } catch (error) {

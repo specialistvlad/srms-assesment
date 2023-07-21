@@ -1,5 +1,7 @@
 import { DeleteButton } from "./delete";
-import { getStudents } from "../provider";
+// import { getStudents } from "../providerOld";
+// import { getStudentsDirect } from '../api';
+import { getStudents } from '../prov';
 
 function convertDateToCanadian(value): string {
   // Convert the date string to a Date object
@@ -15,6 +17,7 @@ function convertDateToCanadian(value): string {
 }
 
 export default async function StundentsPage() {
+  // const data = await getStudents();
   const data = await getStudents();
 
   return (
@@ -30,7 +33,7 @@ export default async function StundentsPage() {
         </thead>
         <tbody>
           {data.map((items) => (
-            <tr key={items._id}>
+            <tr key={items._id.toString()}>
               <td className="border px-4 py-2">
                 {items.firstName} {items.lastName}
               </td>

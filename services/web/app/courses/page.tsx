@@ -1,5 +1,5 @@
 import { DeleteButton } from "./delete";
-import { getCourses } from "../provider";
+import { getCourses } from "../providerOld";
 
 export default async function CoursesPage() {
   const data = await getCourses();
