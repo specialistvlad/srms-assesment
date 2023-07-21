@@ -1,7 +1,7 @@
 import { DeleteButton } from "./delete";
 // import { getStudents } from "../providerOld";
 // import { getStudentsDirect } from '../api';
-import { getStudents } from '../prov';
+import { getStudents } from '../providers';
 
 function convertDateToCanadian(value): string {
   // Convert the date string to a Date object
@@ -42,7 +42,7 @@ export default async function StundentsPage() {
               </td>
               <td className="border px-4 py-2">{items.email}</td>
               <td className="border px-4 py-2">
-                <DeleteButton itemId={items._id} />
+                <DeleteButton itemId={items._id.toString()} />
               </td>
             </tr>
           ))}
