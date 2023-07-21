@@ -1,6 +1,8 @@
 import { DeleteButton } from "./delete";
 import { universalGet } from "../providers";
 
+export const revalidate = 1;
+
 function convertDateToCanadian(value): string {
   // Convert the date string to a Date object
   const birthdayDate = new Date(value);
