@@ -28,7 +28,6 @@ async function post(reset, clearErrors, data) {
     }
     alert("Result has been added!");
     reset();
-    refresh();
     clearErrors({});
     location.reload();
   } catch (error) {
