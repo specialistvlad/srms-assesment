@@ -1,6 +1,4 @@
 "use client";
-// import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-
 import { useForm } from "react-hook-form";
 
 async function post(reset, clearErrors, data) {
@@ -17,6 +15,7 @@ async function post(reset, clearErrors, data) {
     alert("Course has been added!");
     reset();
     clearErrors({});
+    location.reload();
   } catch (error) {
     console.error(error);
   }
@@ -31,10 +30,6 @@ function Error({ message }: { message: string }) {
 }
 
 export default function AddCoursePage() {
-
-  // const router = useRouter()
-  // const pathname = usePathname()
-  // const searchParams = useSearchParams()
   const {
     register,
     handleSubmit,

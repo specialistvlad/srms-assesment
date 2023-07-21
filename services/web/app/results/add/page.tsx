@@ -30,6 +30,7 @@ async function post(reset, clearErrors, data) {
     reset();
     refresh();
     clearErrors({});
+    location.reload();
   } catch (error) {
     console.error(error);
   }
