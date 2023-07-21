@@ -38,9 +38,9 @@ export default function AddCoursePage() {
     formState: { errors },
   } = useForm();
   return (
-    <div className={"flex h-screen w-full items-center justify-center"}>
+    <div className={"flex"}>
       <form
-        className="flex flex-col gap-2 rounded-lg p-8"
+        className="flex flex-col gap-2 rounded-lg"
         onSubmit={handleSubmit(post.bind(this, reset, clearErrors))}
       >
         <h1 className="font-bold">Add</h1>

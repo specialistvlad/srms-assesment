@@ -56,9 +56,9 @@ export default function AddStundentPage() {
     formState: { errors },
   } = useForm();
   return (
-    <div className={clsx("flex w-full items-center justify-center")}>
+    <div className="flex w-full items-center justify-center">
       <form
-        className="flex flex-col gap-2 rounded-lg p-8"
+        className="flex flex-col gap-2 rounded-lg"
         onSubmit={handleSubmit(post.bind(this, reset, clearErrors))}
       >
         <h1 className="font-bold">Add</h1>

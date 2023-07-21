@@ -2,23 +2,59 @@ import Link from "next/link";
 
 export default function NavigationBar() {
   return (
-    <>
-      <Link href="/">🏠 Home</Link>
-      <br />
-      <Link href="/students/add">➕ Add New Student</Link>
-      <br />
-      <Link href="/students" prefetch={false}>🧑‍🎓 Students List</Link>
-      <br />
-      <br />
-      <Link href="/courses/add" prefetch={false}>➕ Add New Course</Link>
-      <br />
-      <Link href="/courses" prefetch={false}>📗 Courses List</Link>
-      <br />
-      <br />
-      <Link href="/results/add">➕ Add New Result</Link>
-      <br />
-      <Link href="/results">🥇 Results List</Link>
-      <br />
-    </>
+    <div className="bg-white p-4 shadow-md rounded-lg">
+      <Link
+        className="block mb-4 text-blue-600 hover:text-blue-800"
+        href="/"
+        style={{ minWidth: "100px" }}
+      >
+        🏠 Home
+      </Link>
+      <Link
+        className="block mb-4 text-blue-600 hover:text-blue-800"
+        href="/students/add"
+        style={{ minWidth: "100px" }}
+      >
+        ➕ Add New Student
+      </Link>
+      <Link
+        className="block mb-4 text-blue-600 hover:text-blue-800"
+        href="/students"
+        prefetch={false}
+        style={{ minWidth: "100px" }}
+      >
+        🧑‍🎓 Students List
+      </Link>
+      <Link
+        className="block mb-4 text-blue-600 hover:text-blue-800"
+        href="/courses/add"
+        prefetch={false}
+        style={{ minWidth: "100px" }}
+      >
+        ➕ Add New Course
+      </Link>
+      <Link
+        className="block mb-4 text-blue-600 hover:text-blue-800"
+        href="/courses"
+        prefetch={false}
+        style={{ minWidth: "100px" }}
+      >
+        📗 Courses List
+      </Link>
+      <Link
+        className="block mb-4 text-blue-600 hover:text-blue-800"
+        href="/results/add"
+        style={{ minWidth: "100px" }}
+      >
+        ➕ Add New Result
+      </Link>
+      <Link
+        className="block mb-4 text-blue-600 hover:text-blue-800"
+        href="/results"
+        style={{ minWidth: "100px" }}
+      >
+        🥇 Results List
+      </Link>
+    </div>
   );
 }
