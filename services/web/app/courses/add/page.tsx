@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { clsx } from "clsx";
 
-export async function post(reset, clearErrors, data) {
+async function post(reset, clearErrors, data) {
   try {
     const response = await fetch(`/api/courses`, {
       method: "POST",

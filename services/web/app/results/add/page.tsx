@@ -14,7 +14,7 @@ function Error({ message }: { message: string }) {
   );
 }
 
-export async function post(reset, clearErrors, data) {
+async function post(reset, clearErrors, data) {
   try {
     const response = await fetch(`/api/results`, {
       method: "POST",
