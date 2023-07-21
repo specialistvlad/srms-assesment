@@ -1,6 +1,4 @@
 import { DeleteButton } from "./delete";
-// import { getStudents } from "../providerOld";
-// import { getStudentsDirect } from '../api';
 import { getStudents } from '../providers';
 
 function convertDateToCanadian(value): string {

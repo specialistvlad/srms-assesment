@@ -1,4 +1,4 @@
-const url = 'http://localhost:5123';
+const url = "http://localhost:5123";
 export const rootUrl = url;
 
 export async function getCourses() {
@@ -21,44 +21,6 @@ export async function getResults() {
   });
   return await res.json();
 }
-
-export function deleteStudent(itemId) {
-  fetch(`${url}/students/${itemId}`, {
-    method: "DELETE",
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Handle the response here (e.g., update the UI if needed)
-        console.log("Student deleted successfully");
-      } else {
-        // Handle the case where the server responds with an error status code
-        console.error("Error deleting student:", response.status);
-        alert("Unable to submit due server error, see console(requests).");
-      }
-    })
-    .catch((error) => {
-      console.error("Error deleting student:", error);
-    });
-}
-
-export function deleteCourse(itemId) {
-    fetch(`${url}/courses/${itemId}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Handle the response here (e.g., update the UI if needed)
-          console.log("Student deleted successfully");
-        } else {
-          // Handle the case where the server responds with an error status code
-          console.error("Error deleting student:", response.status);
-          alert("Unable to submit due server error, see console(requests).");
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting student:", error);
-      });
-  }
 
 export async function postCourse(reset, clearErrors, data) {
   // Send the data to the server in JSON format.
