@@ -163,16 +163,22 @@ app.use(express.urlencoded({ extended: true }));
             student._id.equals(studentId)
           );
 
-          const courseName = course ? course.courseName : "Course Not Found";
+          const courseName = course ? course.courseName : null;
           const studentName = student
             ? `${student.firstName} ${student.lastName}`
-            : "Student Not Found";
+            : null;
 
           return { courseName, studentName, score, _id };
         }
       );
 
-      res.status(200).send(resultWithNames);
+      res
+        .status(200)
+        .send(
+          resultWithNames.filter(
+            ({ studentName, courseName }) => studentName && courseName
+          )
+        );
     } catch (error) {
       res.status(500).send(error);
     }

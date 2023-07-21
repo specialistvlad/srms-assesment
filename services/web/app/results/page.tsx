@@ -7,7 +7,7 @@ export default async function ResultsPage() {
       <table className="min-w-full table-auto">
         <thead>
           <tr>
-            <th className="px-4 py-2">Course Name</th>
+            <th className="px-4 py-2">Course</th>
             <th className="px-4 py-2">Student</th>
             <th className="px-4 py-2">Score</th>
           </tr>
