@@ -1,5 +1,5 @@
 import { DeleteButton } from "./delete";
-import { getStudents } from '../providers';
+import { universalGet } from '../providers';
 
 function convertDateToCanadian(value): string {
   // Convert the date string to a Date object
@@ -15,8 +15,7 @@ function convertDateToCanadian(value): string {
 }
 
 export default async function StundentsPage() {
-  // const data = await getStudents();
-  const data = await getStudents();
+  const data = await universalGet('students');
 
   return (
     <div className="container mx-auto mt-8">

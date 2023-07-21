@@ -1,8 +1,8 @@
 import { DeleteButton } from "./delete";
-import { getCourses } from "../providers";
+import { universalGet } from "../providers";
 
 export default async function CoursesPage() {
-  const data = await getCourses();
+  const data = await universalGet("courses");
   return (
     <div className="container mx-auto mt-8">
       <table className="min-w-full table-auto">

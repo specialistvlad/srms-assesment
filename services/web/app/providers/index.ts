@@ -2,25 +2,27 @@ import * as mongoDB from "mongodb";
 import { ObjectId } from "mongodb";
 import clientPromise from "./mongo";
 
-export async function collection(collectionName: string) {
+type MyCollectionName = "students" | "courses" | "results";
+
+export async function collection(collectionName: MyCollectionName) {
   const client = await clientPromise;
   const db: mongoDB.Db = client.db("srms");
   return db.collection(collectionName);
 }
 
-export async function getStudents() {
-  const students = await collection("students");
+export async function universalGet(collectionName: MyCollectionName) {
+  const students = await collection(collectionName);
   const result = await students.find({}).toArray();
   return result;
 }
 
-export async function postStudents(data) {
-  const students = await collection("students");
+export async function universalPost(collectionName: MyCollectionName, data) {
+  const students = await collection(collectionName);
   return students.insertOne(data);
 }
 
-export async function removeStudent(id: string): Promise<string | boolean> {
-  const coll = await collection("students");
+export async function universalRemove(collectionName: MyCollectionName, id: string): Promise<string | boolean> {
+  const coll = await collection(collectionName);
   const objectId = new ObjectId(id);
 
   const existing = await coll.findOne({ _id: objectId });
@@ -34,17 +36,6 @@ export async function removeStudent(id: string): Promise<string | boolean> {
   }
   
   return id;
-}
-
-export async function getCourses() {
-  const courses = await collection("courses");
-  const result = await courses.find({}).toArray();
-  return result;
-}
-
-export async function postCourses(data) {
-  const courses = await collection("courses");
-  return courses.insertOne(data);
 }
 
 export async function getResults() {
