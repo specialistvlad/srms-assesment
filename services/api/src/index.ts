@@ -24,9 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 
   app.get("/students", async (req: Request, res: Response) => {
     try {
-      const games = await studentsCollection.find({}).toArray();
+      const students = await studentsCollection.find({}).toArray();
 
-      res.status(200).send(games);
+      res.status(200).send(students);
     } catch (error) {
       res.status(500).send(error);
     }
@@ -144,28 +144,45 @@ app.use(express.urlencoded({ extended: true }));
     }
   });
 
-  app.get("/results", (req: Request, res: Response) =>
-    res.json([
-      {
-        id: "b1",
-        courseName: "Web Application Scripting",
-        student: "John Smith",
-        score: "A",
-      },
-      {
-        id: "b2",
-        courseName: "Database Management",
-        student: "John Smith",
-        score: "A",
-      },
-    ])
-  );
+  app.get("/results", async (req: Request, res: Response) => {
+    try {
+      const results = await resultsCollection.find({}).toArray();
+
+      if (results.length <= 0) {
+        res.status(200).send([]);
+        return;
+      }
+
+      const students = await studentsCollection.find({}).toArray();
+      const courses = await coursesCollection.find({}).toArray();
+
+      const resultWithNames = results.map(
+        ({ _id, studentId, courseId, score }) => {
+          const course = courses.find((course) => course._id.equals(courseId));
+          const student = students.find((student) =>
+            student._id.equals(studentId)
+          );
+
+          const courseName = course ? course.courseName : "Course Not Found";
+          const studentName = student
+            ? `${student.firstName} ${student.lastName}`
+            : "Student Not Found";
+
+          return { courseName, studentName, score, _id };
+        }
+      );
+
+      res.status(200).send(resultWithNames);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
 
   app.post("/results", async (req: Request, res: Response) => {
     try {
       const result = await resultsCollection.insertOne({
-        courseId: req.body.courseId,
-        studentId: req.body.courseId,
+        studentId: new ObjectId(req.body.studentId),
+        courseId: new ObjectId(req.body.courseId),
         score: req.body.score,
       });
 
