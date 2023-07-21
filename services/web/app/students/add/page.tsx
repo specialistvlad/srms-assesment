@@ -16,11 +16,11 @@ async function post(reset, clearErrors, data) {
     }
     alert("Student has been added!");
     reset();
-    location.reload();
     clearErrors({});
   } catch (error) {
     console.error(error);
   }
+  location.reload();
 }
 
 function Error({ message }: { message: string }) {

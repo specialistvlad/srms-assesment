@@ -29,10 +29,10 @@ async function post(reset, clearErrors, data) {
     alert("Result has been added!");
     reset();
     clearErrors({});
-    location.reload();
   } catch (error) {
     console.error(error);
   }
+  location.reload();
 }
 
 export default function AddResultPage() {

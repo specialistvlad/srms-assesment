@@ -15,10 +15,10 @@ async function post(reset, clearErrors, data) {
     alert("Course has been added!");
     reset();
     clearErrors({});
-    location.reload();
   } catch (error) {
     console.error(error);
   }
+  location.reload();
 }
 
 function Error({ message }: { message: string }) {
