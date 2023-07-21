@@ -94,7 +94,7 @@ export default function AddStundentPage() {
         />
         {errors.lastName && <Error message={String(errors.lastName.message)} />}
 
-        <label htmlFor="birthday">Expiry Date</label>
+        <label htmlFor="birthday">Birthday</label>
         <input
           className="rounded border border-neutral-200 p-1"
           type="date"
