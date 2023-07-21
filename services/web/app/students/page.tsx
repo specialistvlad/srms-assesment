@@ -1,7 +1,7 @@
 import { DeleteButton } from "./delete";
 import { universalGet } from "../providers";
 
-export const revalidate = 1;
+export const revalidate = 0;
 
 function convertDateToCanadian(value): string {
   // Convert the date string to a Date object

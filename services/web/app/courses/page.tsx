@@ -1,7 +1,7 @@
 import { DeleteButton } from "./delete";
 import { universalGet } from "../providers";
 
-export const revalidate = 1;
+export const revalidate = 0;
 
 export default async function CoursesPage() {
   const data = await universalGet("courses");

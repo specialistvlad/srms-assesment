@@ -1,6 +1,6 @@
 import { getResults } from '../providers';
 
-export const revalidate = 1;
+export const revalidate = 0;
 
 export default async function ResultsPage() {
   const data = await getResults();

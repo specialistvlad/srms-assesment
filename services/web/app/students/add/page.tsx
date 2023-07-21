@@ -5,7 +5,7 @@ import { clsx } from "clsx";
 
 async function post(reset, clearErrors, data) {
   try {
-    const response = await fetch(`/api/courses`, {
+    const response = await fetch(`/api/students`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
