@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+// import { useRouter } from 'next/navigation';
 import { clsx } from "clsx";
 import useSWR from "swr";
 
@@ -27,6 +28,7 @@ async function post(reset, clearErrors, data) {
     }
     alert("Result has been added!");
     reset();
+    refresh();
     clearErrors({});
   } catch (error) {
     console.error(error);
@@ -34,6 +36,7 @@ async function post(reset, clearErrors, data) {
 }
 
 export default function AddResultPage() {
+  // useRouter();
   const {
     register,
     handleSubmit,

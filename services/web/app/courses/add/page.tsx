@@ -1,7 +1,7 @@
 "use client";
+// import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 import { useForm } from "react-hook-form";
-import { clsx } from "clsx";
 
 async function post(reset, clearErrors, data) {
   try {
@@ -31,6 +31,10 @@ function Error({ message }: { message: string }) {
 }
 
 export default function AddCoursePage() {
+
+  // const router = useRouter()
+  // const pathname = usePathname()
+  // const searchParams = useSearchParams()
   const {
     register,
     handleSubmit,
@@ -39,7 +43,7 @@ export default function AddCoursePage() {
     formState: { errors },
   } = useForm();
   return (
-    <div className={clsx("flex h-screen w-full items-center justify-center")}>
+    <div className={"flex h-screen w-full items-center justify-center"}>
       <form
         className="flex flex-col gap-2 rounded-lg p-8"
         onSubmit={handleSubmit(post.bind(this, reset, clearErrors))}

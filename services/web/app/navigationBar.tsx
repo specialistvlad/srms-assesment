@@ -7,12 +7,12 @@ export default function NavigationBar() {
       <br />
       <Link href="/students/add">➕ Add New Student</Link>
       <br />
-      <Link href="/students">🧑‍🎓 Students List</Link>
+      <Link href="/students" prefetch={false}>🧑‍🎓 Students List</Link>
       <br />
       <br />
-      <Link href="/courses/add">➕ Add New Course</Link>
+      <Link href="/courses/add" prefetch={false}>➕ Add New Course</Link>
       <br />
-      <Link href="/courses">📗 Courses List</Link>
+      <Link href="/courses" prefetch={false}>📗 Courses List</Link>
       <br />
       <br />
       <Link href="/results/add">➕ Add New Result</Link>
